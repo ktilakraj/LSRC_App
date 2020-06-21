@@ -19,17 +19,17 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
           primaryColor: _defaultColor,
           scaffoldBackgroundColor: Colors.white),
-      home: HomePage(),
+      home: _HomePage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
+class _HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<_HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
