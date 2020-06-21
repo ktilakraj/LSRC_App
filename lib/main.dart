@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'login.dart';
-import 'register.dart';
+import 'pages/login.dart';
+import 'pages/register.dart';
 
 void main() {
   runApp(MyApp());
@@ -66,6 +66,8 @@ class _HomePageState extends State<HomePage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => LoginPage()));
                         },
                         child: Text('LOG IN'))),
                 SizedBox(
@@ -79,6 +81,10 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(8)),
                         color: _defaultColor,
                         onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => RegisterPage()));
                         },
                         child: Text(
                           'REGISTER',
