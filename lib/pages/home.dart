@@ -113,11 +113,8 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
               child: TabBar(
                 labelColor: Colors.black,
                 controller: _controller,
-                unselectedLabelColor: Colors.grey,
                 labelStyle:
                     TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                unselectedLabelStyle:
-                    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
                 indicator: BoxDecoration(color: Colors.white),
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorColor: Colors.white,
