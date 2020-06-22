@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lsrc/pages/about.dart';
+import 'package:lsrc/pages/course.dart';
 import 'package:lsrc/pages/event.dart';
 import 'package:lsrc/pages/notification.dart';
 
@@ -21,6 +22,8 @@ class _HomePageState extends State<HomePage> {
           index: _index,
           key: ValueKey(_index),
         );
+      case 1:
+        return CoursePage();
       case 3:
         return AboutUsPage();
       default:

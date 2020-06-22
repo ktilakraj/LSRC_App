@@ -49,22 +49,22 @@ class _AboutUsPageState extends State<AboutUsPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-        child: SingleChildScrollView(
-          child: FutureBuilder(
-              future: _fetch,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                AboutModel _about = snapshot.data;
-                final _content =
-                    Utils.removeAllHtmlTags(_about?.content?.rendered ?? "");
-                return Text(
+        child: FutureBuilder(
+            future: _fetch,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              AboutModel _about = snapshot.data;
+              final _content =
+                  Utils.removeAllHtmlTags(_about?.content?.rendered ?? "");
+              return SingleChildScrollView(
+                child: Text(
                   _content,
                   style: GoogleFonts.comfortaa(),
-                );
-              }),
-        ),
+                ),
+              );
+            }),
       ),
     );
   }
