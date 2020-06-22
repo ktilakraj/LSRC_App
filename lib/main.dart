@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'LSRC',
       theme: ThemeData(
           brightness: Brightness.light,
+          buttonColor: _defaultColor,
           primaryColor: _defaultColor,
           scaffoldBackgroundColor: Colors.white),
       home: _HomePage(),

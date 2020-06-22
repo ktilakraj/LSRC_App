@@ -3,6 +3,7 @@ import 'package:lsrc/pages/about.dart';
 import 'package:lsrc/pages/course.dart';
 import 'package:lsrc/pages/event.dart';
 import 'package:lsrc/pages/notification.dart';
+import 'package:lsrc/pages/profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -26,6 +27,8 @@ class _HomePageState extends State<HomePage> {
         return CoursePage();
       case 3:
         return AboutUsPage();
+      case 4:
+        return ProfilePage();
       default:
         return Container();
     }
