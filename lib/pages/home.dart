@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lsrc/pages/event.dart';
 import 'package:lsrc/pages/notification.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +14,12 @@ class _HomePageState extends State<HomePage> {
   Widget getPage(int index) {
     switch (index) {
       case 0:
-        return _NoticeTabPage(index: 0);
+      case 2:
+        final _index = index == 0 ? 0 : 1;
+        return _NoticeTabPage(
+          index: _index,
+          key: ValueKey(_index),
+        );
       default:
         return Container();
     }
@@ -77,8 +83,11 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
   TabController _controller;
   @override
   void initState() {
-    _controller =
-        TabController(length: 2, vsync: this, initialIndex: widget.index);
+    _controller = TabController(
+      length: 2,
+      initialIndex: widget.index,
+      vsync: this,
+    );
     super.initState();
   }
 
@@ -124,7 +133,7 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
                 padding: const EdgeInsets.all(8.0),
                 child: TabBarView(
                     controller: _controller,
-                    children: [NotificationPage(), Text('OK')]),
+                    children: [NotificationPage(), EventPage()]),
               ),
             ),
           ],
