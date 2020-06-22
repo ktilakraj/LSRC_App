@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lsrc/constants.dart';
+import 'package:lsrc/utils/utils.dart';
 import '../models/notification.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -26,12 +27,6 @@ class _NotificationPageState extends State<NotificationPage> {
     super.initState();
   }
 
-  String removeAllHtmlTags(String htmlText) {
-    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
-
-    return htmlText.replaceAll(exp, '');
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -45,7 +40,7 @@ class _NotificationPageState extends State<NotificationPage> {
               itemBuilder: (context, index) => ListTile(
                     leading: Image.asset("assets/notification.png"),
                     title: Text(_notifications[index].title.rendered),
-                    // subtitle: Text(removeAllHtmlTags(
+                    // subtitle: Text(Utils.removeAllHtmlTags(
                     //     _notifications[index].content.rendered)),
                   ));
         });
