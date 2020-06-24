@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 
 import '../constants.dart';
 import '../models/event.dart';
+import 'details.dart';
 
 class EventPage extends StatefulWidget {
   @override
@@ -38,6 +39,13 @@ class _EventPageState extends State<EventPage> {
           return ListView.builder(
               itemCount: _events.length,
               itemBuilder: (context, index) => ListTile(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => DetailsPage(
+                                  content: _events[index]?.content?.rendered,
+                                  title: _events[index]?.title?.rendered,
+                                ))),
                     leading: Image.asset("assets/notification.png"),
                     title: Text(_events[index].title.rendered),
                     // subtitle: Text(removeAllHtmlTags(

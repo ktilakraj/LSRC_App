@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:lsrc/constants.dart';
 import 'package:lsrc/utils/utils.dart';
 import '../models/notification.dart';
+import 'details.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -38,8 +39,20 @@ class _NotificationPageState extends State<NotificationPage> {
           return ListView.builder(
               itemCount: _notifications.length,
               itemBuilder: (context, index) => ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => DetailsPage(
+                                    content: _notifications[index]
+                                        ?.content
+                                        ?.rendered,
+                                    title:
+                                        _notifications[index]?.title?.rendered,
+                                  )));
+                    },
                     leading: Image.asset("assets/notification.png"),
-                    title: Text(_notifications[index].title.rendered),
+                    title: Text(_notifications[index]?.title?.rendered ?? ""),
                     // subtitle: Text(Utils.removeAllHtmlTags(
                     //     _notifications[index].content.rendered)),
                   ));
