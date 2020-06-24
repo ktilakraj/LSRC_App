@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'LSRC',
+      title: 'L. S. Raheja College of Arts & Commerce',
       theme: ThemeData(
           brightness: Brightness.light,
           buttonColor: _defaultColor,
