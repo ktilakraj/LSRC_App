@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
           buttonColor: _defaultColor,
           primaryColor: _defaultColor,
+          accentColor: _defaultColor,
           scaffoldBackgroundColor: Colors.white),
       home: _HomePage(),
     );
