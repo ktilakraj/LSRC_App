@@ -39,10 +39,11 @@ class _HomePageState extends State<_HomePage> {
         children: <Widget>[
           Expanded(
             child: Container(
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(
-                        "assets/bg.png",
+                        "assets/bg.jpg",
                       ),
                       fit: BoxFit.fill)),
               child: Image.asset("assets/logo.png"),
