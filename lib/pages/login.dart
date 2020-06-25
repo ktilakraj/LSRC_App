@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:lsrc/utils/utils.dart';
+import 'package:string_validator/string_validator.dart';
 
 import '../constants.dart';
 import '../models/auth.dart';
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   onSaved: (value) => _email = value,
                   validator: (value) {
-                    if (value.isEmpty) return 'Enter email';
+                    if (!isEmail(value)) return 'Enter valid email';
                     return null;
                   },
                   decoration: InputDecoration(
