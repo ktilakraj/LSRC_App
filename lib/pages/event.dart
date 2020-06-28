@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-import '../constants.dart';
 import '../models/event.dart';
+import '../services/api.dart';
 import 'details.dart';
 
 class EventPage extends StatefulWidget {
@@ -11,20 +10,11 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  Future<List<EventModel>> get fetchEvents async {
-    final _response =
-        await http.get("$baseUrl?categories=42").catchError((e) => null);
-    if (_response?.statusCode == 200) {
-      return eventModelFromMap(_response.body);
-    }
-    return null;
-  }
-
   Future _fetch;
 
   @override
   void initState() {
-    _fetch = fetchEvents;
+    _fetch = ApiProvider.fetchEvents;
     super.initState();
   }
 

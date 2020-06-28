@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:lsrc/constants.dart';
-import 'package:lsrc/utils/utils.dart';
+
 import '../models/notification.dart';
+import '../services/api.dart';
 import 'details.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -11,20 +10,13 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  Future<List<NotificationModel>> get fetchNotifcations async {
-    final _response =
-        await http.get("$baseUrl?categories=41").catchError((e) => null);
-    if (_response?.statusCode == 200) {
-      return notificationApiModelFromMap(_response.body);
-    }
-    return null;
-  }
+
 
   Future _fetch;
 
   @override
   void initState() {
-    _fetch = fetchNotifcations;
+    _fetch = ApiProvider.fetchNotifcations;
     super.initState();
   }
 

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'package:lsrc/utils/utils.dart';
 
-import '../constants.dart';
 import '../models/about.dart';
+import '../services/api.dart';
+import '../utils/utils.dart';
 
 class AboutUsPage extends StatefulWidget {
   @override
@@ -12,19 +11,11 @@ class AboutUsPage extends StatefulWidget {
 }
 
 class _AboutUsPageState extends State<AboutUsPage> {
-  Future<AboutModel> get fetchInfo async {
-    final _response = await http.get("$baseUrl/3359").catchError((e) => null);
-    if (_response?.statusCode == 200) {
-      return aboutModelFromMap(_response.body);
-    }
-    return null;
-  }
-
   Future _fetch;
 
   @override
   void initState() {
-    _fetch = fetchInfo;
+    _fetch = ApiProvider.fetchInfo;
     super.initState();
   }
 

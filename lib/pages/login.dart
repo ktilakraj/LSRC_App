@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'package:lsrc/utils/utils.dart';
 import 'package:string_validator/string_validator.dart';
 
-import '../constants.dart';
-import '../models/auth.dart';
+import '../services/api.dart';
+import '../utils/utils.dart';
 import 'home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,15 +13,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  Future<AuthModel> login(String email, String pass) async {
-    final _response = await http.post("$authUrl/login.php",
-        body: {"email": email, "pass": pass}).catchError((e) => null);
-    if (_response?.statusCode == 200) {
-      return authModelFromMap(_response.body);
-    }
-    return null;
-  }
-
   String _email;
   String _pass;
   bool loading = false;
@@ -119,7 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                                   if (_key.currentState.validate()) {
                                     updateLoading(true);
                                     _key.currentState.save();
-                                    login(_email, _pass).then((value) {
+                                    ApiProvider.login(_email, _pass)
+                                        .then((value) {
                                       Utils.unfocus(context);
                                       updateLoading(false);
                                       if (value == null)

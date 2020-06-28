@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'package:lsrc/utils/utils.dart';
 import 'package:string_validator/string_validator.dart';
 
-import '../constants.dart';
-import '../models/auth.dart';
+import '../services/api.dart';
+import '../utils/utils.dart';
+
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -15,26 +14,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  Future<AuthModel> register(
-      {String email,
-      String pass,
-      String name,
-      String program,
-      String year,
-      String mobileNo}) async {
-    final _response = await http.post("$authUrl/register.php", body: {
-      "email": email,
-      "pass": pass,
-      "name": name,
-      "contact": mobileNo,
-      "year": year,
-      "course": program
-    }).catchError((e) => null);
-    if (_response?.statusCode == 200) {
-      return authModelFromMap(_response.body);
-    }
-    return null;
-  }
+  
 
   TextEditingController _yearController;
 
@@ -275,7 +255,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   if (_key.currentState.validate()) {
                                     updateLoading(true);
                                     _key.currentState.save();
-                                    register(
+                                    ApiProvider.register(
                                             email: _email,
                                             pass: _pass,
                                             mobileNo: _mobileNo,
