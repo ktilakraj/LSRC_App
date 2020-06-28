@@ -1,4 +1,6 @@
 import 'package:http/http.dart' as http;
+import 'package:lsrc/models/profile.dart';
+import 'package:lsrc/services/hive.dart';
 
 import '../constants.dart';
 import '../models/about.dart';
@@ -65,6 +67,33 @@ class ApiProvider {
       "contact": mobileNo,
       "year": year,
       "course": program
+    }).catchError((e) => null);
+    if (_response?.statusCode == 200) {
+      return authModelFromMap(_response.body);
+    }
+    return null;
+  }
+
+  static Future<ProfileModel> get fetchProfile async {
+    final id = await UserProvider.fetchUserId();
+    final _response = await http.post("$authUrl/get.php",
+        body: {"stud_id": id}).catchError((e) => null);
+    if (_response?.statusCode == 200) {
+      return profileModelFromMap(_response.body);
+    }
+    return null;
+  }
+
+  static Future<AuthModel> editProfile(
+      {String name, String contact, String course, String year}) async {
+    final _id = await UserProvider.fetchUserId();
+    final _response = await http.post("$authUrl/edit.php", body: {
+      "name": name,
+      "contact": contact,
+      "year": year,
+      "course": course,
+      "stud_id": _id,
+      "type": "edit"
     }).catchError((e) => null);
     if (_response?.statusCode == 200) {
       return authModelFromMap(_response.body);
