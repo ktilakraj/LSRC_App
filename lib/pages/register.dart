@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lsrc/widgets/courses.dart';
 import 'package:string_validator/string_validator.dart';
 
 import '../services/api.dart';
 import '../utils/utils.dart';
-
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -14,8 +13,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  
-
   TextEditingController _yearController;
 
   String _email;
@@ -27,31 +24,6 @@ class _RegisterPageState extends State<RegisterPage> {
   bool loading = false;
 
   final _key = GlobalKey<FormState>();
-
-  static const List<CourseDetails> _coursesList = [
-    CourseDetails("JC ARTS", "JUNIOR ARTS"),
-    CourseDetails("JC COM", "JUNIOR COMMERCE"),
-    CourseDetails("BCOM", "BACHELOR OF COMMERCE"),
-    CourseDetails("BA", "BACHELOR OF ARTS"),
-    CourseDetails("BAF", "BACHELOR OF COMMERCE (ACCOUNTING & FINANCE)"),
-    CourseDetails("BBI", "BACHELOR OF COMMERCE (BANKING & INSURANCE)"),
-    CourseDetails("BFM", "BACHELOR OF COMMERCE (FINANCIAL MARKETS)"),
-    CourseDetails("BMS", "BACHELOR OF MANAGEMENT STUDIES"),
-    CourseDetails("BAMMC/BMM",
-        "BACHELOR OF ARTS IN MASS MEDIA & COMMUNICATION / BACHELOR IN MASS MEDIA"),
-    CourseDetails("BSC.IT", "BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY"),
-    CourseDetails("MCOM ACC", "MASTER OF COMMERCE IN ACCOUNTANCY"),
-    CourseDetails("MCOM B/F", "MASTER OF COMMERCE IN BANKING & FINANCE"),
-    CourseDetails("MCOM BM", "MASTER OF COMMERCE IN BUSINESS MANAGEMENT"),
-  ];
-
-  List<DropdownMenuItem<String>> getItems() {
-    List<DropdownMenuItem<String>> _items = [];
-    for (final _course in _coursesList)
-      _items
-          .add(DropdownMenuItem(value: _course.id, child: Text(_course.name)));
-    return _items;
-  }
 
   void updateLoading(bool value) {
     setState(() {
@@ -95,8 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: ListView(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Register",
-                    style: TextStyle(fontSize: 24)),
+                Text("Register", style: TextStyle(fontSize: 24)),
                 SizedBox(
                   height: 25,
                 ),
@@ -213,30 +184,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(
                   height: 25,
                 ),
-                DropdownButtonFormField<String>(
-                    isExpanded: true,
-                    items: getItems(),
-                    value: _programName,
-                    validator: (String newValue) {
-                      if (newValue?.isEmpty ?? true)
-                        return "Select a valid Programme";
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        hintText: 'Select Programme',
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                          width: 2,
-                        )),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                          width: 2,
-                        ))),
-                    onChanged: (value) {
-                      setState(() {
-                        _programName = value;
-                      });
-                    }),
+                CoursesDropDown(
+                  onChanged: (value) => _programName = value,
+                ),
                 SizedBox(height: 25),
                 Row(
                   children: <Widget>[
@@ -251,7 +201,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                     side: BorderSide(
                                         color: const Color(0xff071DBD))),
                                 onPressed: () {
-                                  if (_key.currentState.validate()) {}
                                   if (_key.currentState.validate()) {
                                     updateLoading(true);
                                     _key.currentState.save();
@@ -297,11 +246,4 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ));
   }
-}
-
-class CourseDetails {
-  final String id;
-  final String name;
-
-  const CourseDetails(this.id, this.name);
 }
