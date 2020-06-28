@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsrc/services/hive.dart';
 import 'package:string_validator/string_validator.dart';
 
 import '../services/api.dart';
@@ -112,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                                     updateLoading(true);
                                     _key.currentState.save();
                                     ApiProvider.login(_email, _pass)
-                                        .then((value) {
+                                        .then((value) async {
                                       Utils.unfocus(context);
                                       updateLoading(false);
                                       if (value == null)
@@ -120,13 +121,14 @@ class _LoginPageState extends State<LoginPage> {
                                       Utils.showSnackBar(
                                           context, value.message);
                                       if (value.userId != null)
-                                        Future.delayed(Duration(seconds: 2),
-                                            () {
-                                          Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (_) => HomePage()));
-                                        });
+                                        await UserProvider.saveUserId(
+                                            value.userId);
+                                      Future.delayed(Duration(seconds: 2), () {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => HomePage()));
+                                      });
                                     }).catchError((e) {
                                       updateLoading(false);
                                       Utils.showSnackBar(context,

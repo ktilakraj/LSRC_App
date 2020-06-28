@@ -1,17 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsrc/pages/home.dart';
+import 'package:lsrc/services/hive.dart';
 
 import 'pages/login.dart';
 import 'pages/register.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  final _loggedIn = await UserProvider.isLoggedIn;
+  runApp(MyApp(
+    loggedIn: _loggedIn,
+  ));
 }
 
 const _defaultColor = Color(0xff071DBD);
 
 class MyApp extends StatelessWidget {
+  final bool loggedIn;
+
+  const MyApp({Key key, this.loggedIn}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +33,7 @@ class MyApp extends StatelessWidget {
           primaryColor: _defaultColor,
           accentColor: _defaultColor,
           scaffoldBackgroundColor: Colors.white),
-      home: _HomePage(),
+      home: loggedIn ? HomePage() : _HomePage(),
     );
   }
 }
