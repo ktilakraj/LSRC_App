@@ -10,8 +10,6 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-
-
   Future _fetch;
 
   @override
@@ -28,7 +26,8 @@ class _NotificationPageState extends State<NotificationPage> {
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
           List<NotificationModel> _notifications = snapshot.data ?? [];
-          return ListView.builder(
+          return ListView.separated(
+              separatorBuilder: (context, index) => Divider(color: Colors.black,),
               itemCount: _notifications.length,
               itemBuilder: (context, index) => ListTile(
                     onTap: () {
@@ -43,7 +42,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                         _notifications[index]?.title?.rendered,
                                   )));
                     },
-                    leading: Image.asset("assets/notification.png"),
+                    // leading: Image.asset("assets/notification.png"),
                     title: Text(_notifications[index]?.title?.rendered ?? ""),
                     // subtitle: Text(Utils.removeAllHtmlTags(
                     //     _notifications[index].content.rendered)),

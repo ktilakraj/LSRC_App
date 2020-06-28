@@ -26,7 +26,10 @@ class _EventPageState extends State<EventPage> {
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
           List<EventModel> _events = snapshot.data ?? [];
-          return ListView.builder(
+          return ListView.separated(
+              separatorBuilder: (context, index) => Divider(
+                    color: Colors.black,
+                  ),
               itemCount: _events.length,
               itemBuilder: (context, index) => ListTile(
                     onTap: () => Navigator.push(
@@ -36,7 +39,7 @@ class _EventPageState extends State<EventPage> {
                                   content: _events[index]?.content?.rendered,
                                   title: _events[index]?.title?.rendered,
                                 ))),
-                    leading: Image.asset("assets/notification.png"),
+                    // leading: Image.asset("assets/notification.png"),
                     title: Text(_events[index].title.rendered),
                     // subtitle: Text(removeAllHtmlTags(
                     //     _notifications[index].content.rendered)),

@@ -46,10 +46,13 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
           child: Column(
             children: <Widget>[
-              Text(
-                widget?.title ?? "",
-                // style: GoogleFonts.comfortaa(
-                //     textStyle: Theme.of(context).textTheme.headline6),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  widget?.title ?? "",
+                  // style: GoogleFonts.comfortaa(
+                  //     textStyle: Theme.of(context).textTheme.headline6),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 10),
