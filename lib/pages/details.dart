@@ -48,8 +48,8 @@ class _DetailsPageState extends State<DetailsPage> {
             children: <Widget>[
               Text(
                 widget?.title ?? "",
-                style: GoogleFonts.comfortaa(
-                    textStyle: Theme.of(context).textTheme.headline6),
+                // style: GoogleFonts.comfortaa(
+                //     textStyle: Theme.of(context).textTheme.headline6),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 10),

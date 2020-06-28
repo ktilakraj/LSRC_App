@@ -49,7 +49,10 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text("Log in",
-                    style: GoogleFonts.comfortaa().copyWith(fontSize: 24)),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(fontSize: 24)),
                 SizedBox(
                   height: 25,
                 ),

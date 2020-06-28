@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'pages/login.dart';
 import 'pages/register.dart';
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'L. S. Raheja College of Arts & Commerce',
       theme: ThemeData(
+          textTheme: GoogleFonts.comfortaaTextTheme(
+            Theme.of(context).textTheme,
+          ),
           brightness: Brightness.light,
           buttonColor: _defaultColor,
           primaryColor: _defaultColor,

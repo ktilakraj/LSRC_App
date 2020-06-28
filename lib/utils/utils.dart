@@ -12,7 +12,7 @@ class Utils {
     final _snack = SnackBar(
       content: Text(
         message ?? "",
-        style: GoogleFonts.comfortaa(),
+        // style: GoogleFonts.comfortaa(),
       ),
       duration: const Duration(seconds: 2),
     );

@@ -96,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text("Register",
-                    style: GoogleFonts.comfortaa().copyWith(fontSize: 24)),
+                    style: TextStyle(fontSize: 24)),
                 SizedBox(
                   height: 25,
                 ),

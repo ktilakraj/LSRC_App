@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
             // TextField(),
             Text(
               'Your Name',
-              style: GoogleFonts.comfortaa(fontSize: 30),
+              style: TextStyle(fontSize: 30),
             ),
             SizedBox(height: 20),
             Text("STUDENT ID"),

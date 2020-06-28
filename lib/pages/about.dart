@@ -52,7 +52,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
               return SingleChildScrollView(
                 child: Text(
                   _content,
-                  style: GoogleFonts.comfortaa(),
+                  // style: GoogleFonts.comfortaa(),
                 ),
               );
             }),
