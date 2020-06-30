@@ -1,4 +1,4 @@
-package com.example.lsrc
+package com.carapace.lsrc
 
 import io.flutter.embedding.android.FlutterActivity
 
