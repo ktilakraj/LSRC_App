@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+              icon: Icon(Icons.local_library),
               title: Text(
                 'Courses',
               ),
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             //       'Events',
             //     )),
             BottomNavigationBarItem(
-                icon: Icon(Icons.info),
+                icon: Icon(Icons.school),
                 title: Text(
                   'About',
                 )),
