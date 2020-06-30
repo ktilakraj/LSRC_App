@@ -124,15 +124,17 @@ class _LoginPageState extends State<LoginPage> {
                                         throw Exception("Error occured");
                                       Utils.showSnackBar(
                                           context, value.message);
-                                      if (value.userId != null)
+                                      if (value.userId != null) {
                                         await UserProvider.saveUserId(
                                             value.userId);
-                                      Future.delayed(Duration(seconds: 2), () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) => HomePage()));
-                                      });
+                                        Future.delayed(Duration(seconds: 2),
+                                            () {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) => HomePage()));
+                                        });
+                                      }
                                     }).catchError((e) {
                                       updateLoading(false);
                                       Utils.showSnackBar(context,

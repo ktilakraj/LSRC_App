@@ -185,6 +185,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 25,
                 ),
                 CoursesDropDown(
+                  initialValue: null,
                   onChanged: (value) => _programName = value,
                 ),
                 SizedBox(height: 25),

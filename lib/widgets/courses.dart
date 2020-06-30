@@ -49,7 +49,7 @@ class _CoursesDropDownState extends State<CoursesDropDown> {
           if (newValue?.isEmpty ?? true) return "Select a valid Programme";
           return null;
         },
-        disabledHint: Text(fetchCourseName(widget.initialValue)),
+        disabledHint: Text(fetchCourseName(widget?.initialValue ?? '')),
         decoration: InputDecoration(
             enabled: widget.enabled,
             labelText: 'Select Programme',
