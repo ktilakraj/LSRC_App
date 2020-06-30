@@ -35,9 +35,13 @@ class ApiProvider {
     return null;
   }
 
-  static Future<AuthModel> login(String email, String pass) async {
-    final _response = await http.post("$authUrl/login.php",
-        body: {"email": email, "pass": pass}).catchError((e) => null);
+  static Future<AuthModel> login(
+      String email, String pass, String token) async {
+    final _body = {"email": email, "pass": pass};
+    if (token != null) _body["token"] = token;
+    final _response = await http
+        .post("$authUrl/login.php", body: _body)
+        .catchError((e) => null);
     if (_response?.statusCode == 200) {
       return authModelFromMap(_response.body);
     }

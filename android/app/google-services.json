@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "542214919758",
+    "firebase_url": "https://lsrc-abf17.firebaseio.com",
+    "project_id": "lsrc-abf17",
+    "storage_bucket": "lsrc-abf17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542214919758:android:25b2e5ac5aa9379df7951f",
+        "android_client_info": {
+          "package_name": "com.carapace.lsrc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542214919758-as43togennvopccdfkdjut8i3h3qhru6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9QNpdDanMI-KOKSJV9sBTthrZTWLIPqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542214919758-as43togennvopccdfkdjut8i3h3qhru6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

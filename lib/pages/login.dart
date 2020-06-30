@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   String _pass;
   bool loading = false;
   final _key = GlobalKey<FormState>();
-
+  FirebaseMessaging _messaging = FirebaseMessaging();
   void updateLoading(bool value) {
     setState(() {
       loading = value;
@@ -108,11 +109,14 @@ class _LoginPageState extends State<LoginPage> {
                                     borderRadius: BorderRadius.circular(0),
                                     side: BorderSide(
                                         color: const Color(0xff071DBD))),
-                                onPressed: () {
+                                onPressed: () async {
                                   if (_key.currentState.validate()) {
                                     updateLoading(true);
                                     _key.currentState.save();
-                                    ApiProvider.login(_email, _pass)
+                                    final _token = await _messaging
+                                        .getToken()
+                                        .catchError((e) => null);
+                                    ApiProvider.login(_email, _pass, _token)
                                         .then((value) async {
                                       Utils.unfocus(context);
                                       updateLoading(false);
