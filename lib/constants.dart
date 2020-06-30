@@ -2,20 +2,20 @@ const String baseUrl = "https://lsraheja.org/wp-json/wp/v2/posts";
 const String authUrl = "https://www.lsraheja.org/lsrc_moa/";
 
 const List<CourseDetails> coursesList = [
-  CourseDetails("JC ARTS", "JUNIOR ARTS"),
-  CourseDetails("JC COM", "JUNIOR COMMERCE"),
-  CourseDetails("BCOM", "BACHELOR OF COMMERCE"),
-  CourseDetails("BA", "BACHELOR OF ARTS"),
-  CourseDetails("BAF", "BACHELOR OF COMMERCE (ACCOUNTING & FINANCE)"),
-  CourseDetails("BBI", "BACHELOR OF COMMERCE (BANKING & INSURANCE)"),
-  CourseDetails("BFM", "BACHELOR OF COMMERCE (FINANCIAL MARKETS)"),
-  CourseDetails("BMS", "BACHELOR OF MANAGEMENT STUDIES"),
+  CourseDetails("JC ARTS", "Junior Arts"),
+  CourseDetails("JC COM", "Junior Commerce"),
+  CourseDetails("BCOM", "Bachelor Of Commerce"),
+  CourseDetails("BA", "Bachelor Of Arts"),
+  CourseDetails("BAF", "Bachelor Of Commerce (Accounting & Finance)"),
+  CourseDetails("BBI", "Bachelor Of Commerce (Banking & Insurance)"),
+  CourseDetails("BFM", "Bachelor Of Commerce (Financial Markets)"),
+  CourseDetails("BMS", "Bachelor Of Management Studies"),
   CourseDetails("BAMMC/BMM",
-      "BACHELOR OF ARTS IN MASS MEDIA & COMMUNICATION / BACHELOR IN MASS MEDIA"),
-  CourseDetails("BSC.IT", "BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY"),
-  CourseDetails("MCOM ACC", "MASTER OF COMMERCE IN ACCOUNTANCY"),
-  CourseDetails("MCOM B/F", "MASTER OF COMMERCE IN BANKING & FINANCE"),
-  CourseDetails("MCOM BM", "MASTER OF COMMERCE IN BUSINESS MANAGEMENT"),
+      "Bachelor Of Arts In Mass Media & Communication / Bachelor In Mass Media"),
+  CourseDetails("BSC.IT", "Bachelor Of Science In Information Technology"),
+  CourseDetails("MCOM ACC", "Master Of Commerce In Accountancy"),
+  CourseDetails("MCOM B/F", "Master Of Commerce In Banking & Finance"),
+  CourseDetails("MCOM BM", "Master Of Commerce In Business Management"),
 ];
 
 class CourseDetails {
