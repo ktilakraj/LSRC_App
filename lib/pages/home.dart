@@ -17,17 +17,12 @@ class _HomePageState extends State<HomePage> {
   Widget getPage(int index) {
     switch (index) {
       case 0:
-      case 2:
-        final _index = index == 0 ? 0 : 1;
-        return _NoticeTabPage(
-          index: _index,
-          key: ValueKey(_index),
-        );
+        return _NoticeTabPage();
       case 1:
         return CoursePage();
-      case 3:
+      case 2:
         return AboutUsPage();
-      case 4:
+      case 3:
         return ProfilePage();
       default:
         return Container();
@@ -57,16 +52,16 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.local_library),
+              icon: Icon(Icons.school),
               title: Text(
                 'Courses',
               ),
             ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.event),
-                title: Text(
-                  'Events',
-                )),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.event),
+            //     title: Text(
+            //       'Events',
+            //     )),
             BottomNavigationBarItem(
                 icon: Icon(Icons.info),
                 title: Text(
@@ -94,7 +89,7 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
   void initState() {
     _controller = TabController(
       length: 2,
-      initialIndex: widget.index,
+      initialIndex: widget.index ?? 0,
       vsync: this,
     );
     super.initState();
@@ -121,7 +116,7 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
                 controller: _controller,
                 labelStyle: Theme.of(context)
                     .textTheme
-                    .headline6
+                    .subtitle1
                     .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
                 indicator: BoxDecoration(color: Colors.white),
                 indicatorSize: TabBarIndicatorSize.tab,
