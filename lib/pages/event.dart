@@ -31,18 +31,24 @@ class _EventPageState extends State<EventPage> {
                     color: Colors.black,
                   ),
               itemCount: _events.length,
-              itemBuilder: (context, index) => ListTile(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => DetailsPage(
-                                  content: _events[index]?.content?.rendered,
-                                  title: _events[index]?.title?.rendered,
-                                ))),
-                    // leading: Image.asset("assets/notification.png"),
-                    title: Text(_events[index].title.rendered),
-                    // subtitle: Text(removeAllHtmlTags(
-                    //     _notifications[index].content.rendered)),
+              itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => DetailsPage(
+                                content: _events[index]?.content?.rendered,
+                                title: _events[index]?.title?.rendered,
+                              ))),
+                  // leading: Image.asset("assets/notification.png"),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Text(
+                      _events[index]?.title?.rendered ?? "",
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  )
+                  // subtitle: Text(removeAllHtmlTags(
+                  //     _notifications[index].content.rendered)),
                   ));
         });
   }

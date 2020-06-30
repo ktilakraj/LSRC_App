@@ -27,9 +27,11 @@ class _NotificationPageState extends State<NotificationPage> {
             return Center(child: CircularProgressIndicator());
           List<NotificationModel> _notifications = snapshot.data ?? [];
           return ListView.separated(
-              separatorBuilder: (context, index) => Divider(color: Colors.black,),
+              separatorBuilder: (context, index) => Divider(
+                    color: Colors.black,
+                  ),
               itemCount: _notifications.length,
-              itemBuilder: (context, index) => ListTile(
+              itemBuilder: (context, index) => GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
@@ -42,10 +44,18 @@ class _NotificationPageState extends State<NotificationPage> {
                                         _notifications[index]?.title?.rendered,
                                   )));
                     },
-                    // leading: Image.asset("assets/notification.png"),
-                    title: Text(_notifications[index]?.title?.rendered ?? ""),
-                    // subtitle: Text(Utils.removeAllHtmlTags(
-                    //     _notifications[index].content.rendered)),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+
+                      // leading: Image.asset("assets/notification.png"),
+                      child: Text(
+                        _notifications[index]?.title?.rendered ?? "",
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                      // subtitle: Text(Utils.removeAllHtmlTags(
+                      //     _notifications[index].content.rendered)),
+                    ),
                   ));
         });
   }
