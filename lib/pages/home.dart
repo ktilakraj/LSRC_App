@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
           onTap: (index) => setState(() {
             _selectedIndex = index;
           }),
+          type: BottomNavigationBarType.fixed,
           selectedIconTheme:
               IconThemeData(color: Theme.of(context).primaryColor),
           unselectedIconTheme: const IconThemeData(color: Colors.grey),
@@ -109,7 +110,7 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
         body: Column(
           children: <Widget>[
             Container(
-              height: 40,
+              height: 50,
               color: Colors.grey[300],
               child: TabBar(
                 labelColor: Colors.black,
@@ -121,6 +122,7 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
                 indicator: BoxDecoration(color: Colors.white),
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorColor: Colors.white,
+                indicatorWeight: 0,
                 tabs: <Widget>[
                   Tab(
                     text: 'Notice Board',
@@ -133,7 +135,7 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.fromLTRB(8,16,8,8),
                 child: TabBarView(
                     controller: _controller,
                     children: [NotificationPage(), EventPage()]),

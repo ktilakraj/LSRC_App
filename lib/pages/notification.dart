@@ -46,7 +46,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     },
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 2),
 
                       // leading: Image.asset("assets/notification.png"),
                       child: Text(

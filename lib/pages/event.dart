@@ -41,7 +41,7 @@ class _EventPageState extends State<EventPage> {
                               ))),
                   // leading: Image.asset("assets/notification.png"),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                     child: Text(
                       _events[index]?.title?.rendered ?? "",
                       style: Theme.of(context).textTheme.subtitle1,

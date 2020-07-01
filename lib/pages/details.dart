@@ -1,7 +1,6 @@
 import 'package:easy_web_view/easy_web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DetailsPage extends StatefulWidget {
   final String content;
@@ -40,40 +39,33 @@ class _DetailsPageState extends State<DetailsPage> {
           SizedBox(width: 10)
         ],
       ),
-      body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8.0,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 12, 24, 5),
+            child: Text(
+              widget?.title ?? "",
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
           ),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget?.title ?? "",
-                  // style: GoogleFonts.comfortaa(
-                  //     textStyle: Theme.of(context).textTheme.headline6),
-                ),
+          Divider(
+            thickness: 1,
+            color: Colors.grey[300],
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 5, 16, 10),
+              child: EasyWebView(
+                src: widget.content,
+                isHtml: true, widgetsTextSelectable: true,
+                onLoaded: () {},
+                // style: GoogleFonts.comfortaa(),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 10),
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.grey[300],
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 5, 16, 10),
-                  child: EasyWebView(
-                    src: widget.content,
-                    isMarkdown: true,
-                    onLoaded: () {},
-                    // style: GoogleFonts.comfortaa(),
-                  ),
-                ),
-              ),
-            ],
-          )),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

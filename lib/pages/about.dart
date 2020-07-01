@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../models/about.dart';
 import '../services/api.dart';
@@ -39,7 +38,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: FutureBuilder(
             future: _fetch,
             builder: (context, snapshot) {
