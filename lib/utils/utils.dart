@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
   static String removeAllHtmlTags(String htmlText) {
@@ -23,6 +24,14 @@ class Utils {
     final currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
+    }
+  }
+
+  static launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      debugPrint('Could not launch $url');
     }
   }
 }

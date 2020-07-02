@@ -1,6 +1,8 @@
-import 'package:easy_web_view/easy_web_view.dart';
+// import 'package:easy_web_view/easy_web_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lsrc/utils/utils.dart';
 
 class DetailsPage extends StatefulWidget {
   final String content;
@@ -12,6 +14,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  InAppWebViewController webView;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,11 +59,27 @@ class _DetailsPageState extends State<DetailsPage> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 5, 16, 10),
-              child: EasyWebView(
-                src: widget.content,
-                isHtml: true, widgetsTextSelectable: true,
-                onLoaded: () {},
-                // style: GoogleFonts.comfortaa(),
+              // child: EasyWebView(
+              //   src: widget.content,
+              //   isHtml: true, widgetsTextSelectable: true,
+              //   onLoaded: () {},
+              //   // style: GoogleFonts.comfortaa(),
+              // ),
+              child: InAppWebView(
+                shouldOverrideUrlLoading: (controller, request) async {
+                  Utils.launchURL(request.url);
+                  return ShouldOverrideUrlLoadingAction.CANCEL;
+                },
+                initialData: InAppWebViewInitialData(data: widget.content),
+                initialOptions: InAppWebViewGroupOptions(
+                    android: AndroidInAppWebViewOptions(textZoom: 250),
+                    crossPlatform: InAppWebViewOptions(
+                      useShouldOverrideUrlLoading: true,
+                      debuggingEnabled: true,
+                    )),
+                onWebViewCreated: (InAppWebViewController controller) {
+                  webView = controller;
+                },
               ),
             ),
           ),
