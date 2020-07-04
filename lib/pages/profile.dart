@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import '../main.dart';
 import '../models/profile.dart';
 import '../services/api.dart';
 import '../services/hive.dart';
 import '../utils/utils.dart';
 import '../widgets/courses.dart';
-import 'login.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -248,8 +248,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: defaultColor,
                           onPressed: () async {
                             await UserProvider.logOut();
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (_) => LoginPage()));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => SplashPage()));
                           },
                           child: Text(
                             'Logout',
