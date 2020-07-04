@@ -38,10 +38,10 @@ class _HomePageState extends State<HomePage> {
           onTap: (index) => setState(() {
             _selectedIndex = index;
           }),
+          selectedItemColor: Color(0xffdc5013),
+          unselectedItemColor: Colors.white,
+          backgroundColor: Color(0xff071dbd),
           type: BottomNavigationBarType.fixed,
-          selectedIconTheme:
-              IconThemeData(color: Theme.of(context).primaryColor),
-          unselectedIconTheme: const IconThemeData(color: Colors.grey),
           showSelectedLabels: false,
           showUnselectedLabels: false,
           // selectedLabelStyle: TextStyle(color: Colors.black),
@@ -135,7 +135,7 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(8,16,8,8),
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
                 child: TabBarView(
                     controller: _controller,
                     children: [NotificationPage(), EventPage()]),
