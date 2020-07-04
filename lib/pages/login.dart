@@ -129,6 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                                             value.userId);
                                         Future.delayed(Duration(seconds: 2),
                                             () {
+                                          Navigator.pop(context);
                                           Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(

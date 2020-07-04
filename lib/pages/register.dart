@@ -232,6 +232,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                             value.studId);
                                         Future.delayed(Duration(seconds: 2),
                                             () {
+                                          Navigator.pop(context);
                                           Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
