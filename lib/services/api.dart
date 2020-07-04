@@ -49,6 +49,21 @@ class ApiProvider {
     return null;
   }
 
+  static Future<String> forgotPassword(
+    String email,
+  ) async {
+    final _body = {
+      "stud_email": email,
+    };
+    final _response = await http
+        .post("$authUrl/forgot.php", body: _body)
+        .catchError((e) => null);
+    if (_response?.statusCode == 200) {
+      return authModelFromMap(_response.body).message;
+    }
+    return null;
+  }
+
   static Future<List<NotificationModel>> get fetchNotifcations async {
     final _response =
         await http.get("$baseUrl?categories=41").catchError((e) => null);

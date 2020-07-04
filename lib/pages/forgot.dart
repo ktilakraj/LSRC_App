@@ -1,26 +1,19 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lsrc/services/hive.dart';
 import 'package:string_validator/string_validator.dart';
 
 import '../services/api.dart';
 import '../utils/utils.dart';
-import 'forgot.dart';
-import 'home.dart';
 
-class LoginPage extends StatefulWidget {
+class ForgotPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _ForgotPageState createState() => _ForgotPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ForgotPageState extends State<ForgotPage> {
   String _email;
-  String _pass;
   bool loading = false;
   final _key = GlobalKey<FormState>();
-  FirebaseMessaging _messaging = FirebaseMessaging();
   void updateLoading(bool value) {
     setState(() {
       loading = value;
@@ -51,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Log in",
+                Text("Forgot Password",
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
@@ -79,33 +72,6 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 25,
                 ),
-                TextFormField(
-                  onSaved: (value) => _pass = value,
-                  validator: (value) {
-                    if (value.isEmpty) return 'Enter password';
-                    return null;
-                  },
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      hintText: 'Password',
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        width: 2,
-                      )),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                        width: 2,
-                      ))),
-                ),
-                // SizedBox(height: 25),
-                FlatButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => ForgotPage(),
-                            fullscreenDialog: true)),
-                    child: Text('Forgot Password')),
-                SizedBox(height: 25),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -119,32 +85,16 @@ class _LoginPageState extends State<LoginPage> {
                                     side: BorderSide(
                                         color: const Color(0xff071DBD))),
                                 onPressed: () async {
+                                  Utils.unfocus(context);
                                   if (_key.currentState.validate()) {
                                     updateLoading(true);
                                     _key.currentState.save();
-                                    final _token = await _messaging
-                                        .getToken()
-                                        .catchError((e) => null);
-                                    ApiProvider.login(_email, _pass, _token)
+                                    ApiProvider.forgotPassword(_email)
                                         .then((value) async {
-                                      Utils.unfocus(context);
                                       updateLoading(false);
                                       if (value == null)
                                         throw Exception("Error occured");
-                                      Utils.showSnackBar(
-                                          context, value.message);
-                                      if (value.userId != null) {
-                                        await UserProvider.saveUserId(
-                                            value.userId);
-                                        Future.delayed(Duration(seconds: 2),
-                                            () {
-                                          Navigator.pop(context);
-                                          Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (_) => HomePage()));
-                                        });
-                                      }
+                                      Utils.showSnackBar(context, value);
                                     }).catchError((e) {
                                       updateLoading(false);
                                       Utils.showSnackBar(context,
@@ -153,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                 },
                                 child: Text(
-                                  'LOG IN',
+                                  'Send Email',
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 color: Colors.black,
