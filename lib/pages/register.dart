@@ -1,11 +1,14 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lsrc/widgets/courses.dart';
 import 'package:string_validator/string_validator.dart';
 
 import '../services/api.dart';
+import '../services/hive.dart';
 import '../utils/utils.dart';
+import '../widgets/courses.dart';
+import 'home.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -22,6 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String _name;
   String _selectedYear;
   bool loading = false;
+  FirebaseMessaging _messaging = FirebaseMessaging();
 
   final _key = GlobalKey<FormState>();
 
@@ -201,30 +205,39 @@ class _RegisterPageState extends State<RegisterPage> {
                                     borderRadius: BorderRadius.circular(0),
                                     side: BorderSide(
                                         color: const Color(0xff071DBD))),
-                                onPressed: () {
+                                onPressed: () async {
                                   if (_key.currentState.validate()) {
+                                    Utils.unfocus(context);
                                     updateLoading(true);
                                     _key.currentState.save();
+                                    final _token = await _messaging
+                                        .getToken()
+                                        .catchError((e) => null);
                                     ApiProvider.register(
+                                            token: _token,
                                             email: _email,
                                             pass: _pass,
                                             mobileNo: _mobileNo,
                                             name: _name,
                                             program: _programName,
                                             year: _selectedYear)
-                                        .then((value) {
-                                      Utils.unfocus(context);
+                                        .then((value) async {
                                       updateLoading(false);
                                       if (value == null)
                                         throw Exception("Error occured");
                                       Utils.showSnackBar(
                                           context, value.message);
-                                      if (value.message ==
-                                          "Registration successful")
+                                      if (value.studId != null) {
+                                        await UserProvider.saveUserId(
+                                            value.studId);
                                         Future.delayed(Duration(seconds: 2),
                                             () {
-                                          Navigator.pop(context);
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) => HomePage()));
                                         });
+                                      }
                                     }).catchError((e) {
                                       updateLoading(false);
                                       Utils.showSnackBar(context,

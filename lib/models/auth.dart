@@ -9,10 +9,11 @@ AuthModel authModelFromMap(String str) => AuthModel.fromMap(json.decode(str));
 String authModelToMap(AuthModel data) => json.encode(data.toMap());
 
 class AuthModel {
-  AuthModel({this.message, this.userId, this.code});
+  AuthModel({this.message, this.userId, this.code, this.studId});
   final int code;
   final String message;
   final String userId;
+  final String studId;
 
   AuthModel copyWith({
     String message,
@@ -28,6 +29,9 @@ class AuthModel {
       userId: json["user_id"] == null || json["user_id"] == 0
           ? null
           : json["user_id"],
+      studId: json["stud_id"] == null || json["stud_id"] == 0
+          ? null
+          : json["stud_id"],
       code: json["code"] == null ? null : json["code"]);
 
   Map<String, dynamic> toMap() => {

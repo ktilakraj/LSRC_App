@@ -64,15 +64,21 @@ class ApiProvider {
       String name,
       String program,
       String year,
+      String token,
       String mobileNo}) async {
-    final _response = await http.post("$authUrl/register.php", body: {
+    final _body = {
       "email": email,
       "pass": pass,
       "name": name,
       "contact": mobileNo,
       "year": year,
       "course": program
-    }).catchError((e) => null);
+    };
+    if (token != null) _body["token"] = token;
+    final _response = await http
+        .post("$authUrl/register.php", body: _body)
+        .catchError((e) => null);
+    print(_response.body);
     if (_response?.statusCode == 200) {
       return authModelFromMap(_response.body);
     }
