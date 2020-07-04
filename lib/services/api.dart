@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:lsrc/models/courselist.dart';
 import 'package:lsrc/models/profile.dart';
 import 'package:lsrc/services/hive.dart';
 
@@ -101,6 +102,15 @@ class ApiProvider {
     }).catchError((e) => null);
     if (_response?.statusCode == 200) {
       return authModelFromMap(_response.body);
+    }
+    return null;
+  }
+
+  static Future<List<CourseListModel>> fetchCourseList() async {
+    final _response =
+        await http.get("$authUrl/getCourse.php").catchError((e) => null);
+    if (_response?.statusCode == 200) {
+      return courseListModelFromMap(_response.body);
     }
     return null;
   }
