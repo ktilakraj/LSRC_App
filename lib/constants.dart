@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 const String baseUrl = "https://lsraheja.org/wp-json/wp/v2/posts";
 const String authUrl = "https://www.lsraheja.org/lsrc_moa/";
 
@@ -24,3 +26,5 @@ class CourseDetails {
 
   const CourseDetails(this.id, this.name);
 }
+
+const defaultColor = Color(0xff071DBD);

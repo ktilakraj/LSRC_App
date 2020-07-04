@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import '../widgets/courses.dart';
+
+import '../constants.dart';
 import '../models/profile.dart';
-import '../utils/utils.dart';
 import '../services/api.dart';
+import '../services/hive.dart';
+import '../utils/utils.dart';
+import '../widgets/courses.dart';
+import 'login.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -119,116 +123,138 @@ class _ProfilePageState extends State<ProfilePage> {
                 key: _key,
                 child: Padding(
                   padding: const EdgeInsets.all(24),
-                  child: ListView(
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Container(width: 100, child: Text('Name')),
-                          Expanded(
-                            child: TextFormField(
-                              initialValue: _profile?.studName,
-                              onSaved: (value) => _name = value,
-                              validator: (value) {
-                                if (value.isEmpty) return 'Enter name';
-                                return null;
-                              },
-                              enabled: edit,
-                              decoration: InputDecoration(
-                                  hintText: 'Name',
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width: 2,
-                                  )),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width: 2,
-                                  ))),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: 100,
-                            child: Text('Contact'),
-                          ),
-                          Expanded(
-                            child: TextFormField(
-                              onSaved: (value) => _mobileNo = value,
-                              validator: (value) {
-                                if (value.length < 8)
-                                  return 'Enter valid number';
-                                return null;
-                              },
-                              initialValue: _profile?.studContact,
-                              enabled: edit,
-                              keyboardType: TextInputType.phone,
-                              decoration: InputDecoration(
-                                  hintText: 'Phone No.',
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width: 2,
-                                  )),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width: 2,
-                                  ))),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            width: 100,
-                            child: Text('Year'),
-                          ),
-                          Expanded(
-                            child: TextFormField(
-                              onSaved: (value) => _selectedYear = value,
-                              validator: (value) {
-                                if (value.length < 4) return 'Enter valid year';
-                                final _year = int.parse(value);
-                                if (_year < 1980 || _year > DateTime.now().year)
-                                  return 'Enter valid year';
-                                return null;
-                              },
-                              enabled: edit,
-                              controller: _yearController,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                  errorStyle: TextStyle(
-                                    color: Theme.of(context)
-                                        .errorColor, // or any other color
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
+                          children: <Widget>[
+                            Row(
+                              children: [
+                                Container(width: 100, child: Text('Name')),
+                                Expanded(
+                                  child: TextFormField(
+                                    initialValue: _profile?.studName,
+                                    onSaved: (value) => _name = value,
+                                    validator: (value) {
+                                      if (value.isEmpty) return 'Enter name';
+                                      return null;
+                                    },
+                                    enabled: edit,
+                                    decoration: InputDecoration(
+                                        hintText: 'Name',
+                                        border: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                          width: 2,
+                                        )),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                          width: 2,
+                                        ))),
                                   ),
-                                  hintText: 'Admission year',
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width: 2,
-                                  )),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                    width: 2,
-                                  ))),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: 100,
+                                  child: Text('Contact'),
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    onSaved: (value) => _mobileNo = value,
+                                    validator: (value) {
+                                      if (value.length < 8)
+                                        return 'Enter valid number';
+                                      return null;
+                                    },
+                                    initialValue: _profile?.studContact,
+                                    enabled: edit,
+                                    keyboardType: TextInputType.phone,
+                                    decoration: InputDecoration(
+                                        hintText: 'Phone No.',
+                                        border: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                          width: 2,
+                                        )),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                          width: 2,
+                                        ))),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: 100,
+                                  child: Text('Year'),
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    onSaved: (value) => _selectedYear = value,
+                                    validator: (value) {
+                                      if (value.length < 4)
+                                        return 'Enter valid year';
+                                      final _year = int.parse(value);
+                                      if (_year < 1980 ||
+                                          _year > DateTime.now().year)
+                                        return 'Enter valid year';
+                                      return null;
+                                    },
+                                    enabled: edit,
+                                    controller: _yearController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                        errorStyle: TextStyle(
+                                          color: Theme.of(context)
+                                              .errorColor, // or any other color
+                                        ),
+                                        hintText: 'Admission year',
+                                        border: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                          width: 2,
+                                        )),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                          width: 2,
+                                        ))),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            CoursesDropDown(
+                                enabled: edit,
+                                initialValue: _profile?.studCourse,
+                                onChanged: (value) => _programName = value),
+                          ],
+                        ),
                       ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      CoursesDropDown(
-                          enabled: edit,
-                          initialValue: _profile?.studCourse,
-                          onChanged: (value) => _programName = value),
                       SizedBox(height: 25),
+                      RaisedButton(
+                          padding: EdgeInsets.all(16),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          color: defaultColor,
+                          onPressed: () async {
+                            await UserProvider.logOut();
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (_) => LoginPage()));
+                          },
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(color: Colors.white),
+                          ))
                     ],
                   ),
                 ),

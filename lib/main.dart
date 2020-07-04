@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lsrc/pages/home.dart';
-import 'package:lsrc/services/hive.dart';
 
+import 'constants.dart';
+import 'pages/home.dart';
 import 'pages/login.dart';
 import 'pages/register.dart';
+import 'services/hive.dart';
 
 void main() async {
   final _loggedIn = await UserProvider.isLoggedIn;
@@ -13,8 +13,6 @@ void main() async {
     loggedIn: _loggedIn,
   ));
 }
-
-const _defaultColor = Color(0xff071DBD);
 
 class MyApp extends StatelessWidget {
   final bool loggedIn;
@@ -29,9 +27,9 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
           brightness: Brightness.light,
-          buttonColor: _defaultColor,
-          primaryColor: _defaultColor,
-          accentColor: _defaultColor,
+          buttonColor: defaultColor,
+          primaryColor: defaultColor,
+          accentColor: defaultColor,
           scaffoldBackgroundColor: Colors.white),
       home: loggedIn ? HomePage() : _HomePage(),
     );
@@ -76,7 +74,7 @@ class _HomePageState extends State<_HomePage> {
                 Expanded(
                     flex: 3,
                     child: OutlineButton(
-                        color: _defaultColor,
+                        color: defaultColor,
                         padding: EdgeInsets.all(16),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -94,7 +92,7 @@ class _HomePageState extends State<_HomePage> {
                         padding: EdgeInsets.all(16),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
-                        color: _defaultColor,
+                        color: defaultColor,
                         onPressed: () {
                           Navigator.push(
                               context,

@@ -22,4 +22,9 @@ class UserProvider {
     final _id = await fetchUserId();
     return _id != null;
   }
+
+  static Future<void> logOut() async {
+    final _box = await _getBox();
+    await _box.clear();
+  }
 }
