@@ -51,10 +51,10 @@ class _CoursePageState extends State<CoursePage> {
               final _content = _course?.content?.rendered ?? "";
               return Column(
                 children: <Widget>[
-                  Text(
-                    _course?.title?.rendered ?? "",
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
+                  // Text(
+                  //   _course?.title?.rendered ?? "",
+                  //   style: Theme.of(context).textTheme.headline6,
+                  // ),
                   Expanded(
                     child: EasyWebView(
                       src: _content,
