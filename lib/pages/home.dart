@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:lsrc/pages/about.dart';
 import 'package:lsrc/pages/course.dart';
 import 'package:lsrc/pages/event.dart';
@@ -125,10 +126,24 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
                 indicatorWeight: 0,
                 tabs: <Widget>[
                   Tab(
-                    text: 'Notice Board',
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(LineIcons.bullhorn),
+                        SizedBox(width: 10),
+                        Text('Notice Board')
+                      ],
+                    ),
                   ),
                   Tab(
-                    text: 'Events',
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.event),
+                        SizedBox(width: 10),
+                        Text('Events')
+                      ],
+                    ),
                   )
                 ],
               ),
