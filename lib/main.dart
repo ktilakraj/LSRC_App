@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'constants.dart';
 import 'pages/home.dart';
@@ -9,9 +12,12 @@ import 'services/hive.dart';
 
 void main() async {
   final _loggedIn = await UserProvider.isLoggedIn;
-  runApp(MyApp(
-    loggedIn: _loggedIn,
-  ));
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  runZonedGuarded(
+      () async => runApp(MyApp(
+            loggedIn: _loggedIn,
+          )),
+      Crashlytics.instance.recordError);
 }
 
 class MyApp extends StatelessWidget {
