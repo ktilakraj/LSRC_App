@@ -1,9 +1,9 @@
-import 'package:easy_web_view/easy_web_view.dart';
+// import 'package:easy_web_view/easy_web_view.dart';
 import 'package:flutter/material.dart';
+import 'package:lsrc/widgets/webview.dart';
 
 import '../models/course.dart';
 import '../services/api.dart';
-
 
 class CoursePage extends StatefulWidget {
   @override
@@ -11,7 +11,6 @@ class CoursePage extends StatefulWidget {
 }
 
 class _CoursePageState extends State<CoursePage> {
- 
   Future _fetch;
 
   @override
@@ -56,11 +55,14 @@ class _CoursePageState extends State<CoursePage> {
                   //   style: Theme.of(context).textTheme.headline6,
                   // ),
                   Expanded(
-                    child: EasyWebView(
-                      src: _content,
-                      isMarkdown: true,
-                      onLoaded: () {},
-                      // style: GoogleFonts.comfortaa(),
+                    // child: EasyWebView(
+                    //   src: _content,
+                    //   isMarkdown: true,
+                    //   onLoaded: () {},
+                    //   // style: GoogleFonts.comfortaa(),
+                    // ),
+                    child: CustomWebView(
+                      content: _content,
                     ),
                   ),
                 ],

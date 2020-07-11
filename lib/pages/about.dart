@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lsrc/widgets/webview.dart';
 
 import '../models/about.dart';
 import '../services/api.dart';
-import '../utils/utils.dart';
 
 class AboutUsPage extends StatefulWidget {
   @override
@@ -38,7 +38,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: FutureBuilder(
             future: _fetch,
             builder: (context, snapshot) {
@@ -46,13 +46,16 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 return Center(child: CircularProgressIndicator());
               }
               AboutModel _about = snapshot.data;
-              final _content =
-                  Utils.removeAllHtmlTags(_about?.content?.rendered ?? "");
-              return SingleChildScrollView(
-                child: Text(
-                  _content,
-                  // style: GoogleFonts.comfortaa(),
-                ),
+              // final _content =
+              //     Utils.removeAllHtmlTags(_about?.content?.rendered ?? "");
+              // return SingleChildScrollView(
+              //   child: Text(
+              //     _content,
+              //     // style: GoogleFonts.comfortaa(),
+              //   ),
+              // );
+              return CustomWebView(
+                content: _about?.content?.rendered ?? "",
               );
             }),
       ),

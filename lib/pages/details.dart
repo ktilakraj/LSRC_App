@@ -1,20 +1,13 @@
 // import 'package:easy_web_view/easy_web_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lsrc/utils/utils.dart';
+import 'package:lsrc/widgets/webview.dart';
 
-class DetailsPage extends StatefulWidget {
+class DetailsPage extends StatelessWidget {
   final String content;
   final String title;
 
   const DetailsPage({Key key, this.content, this.title}) : super(key: key);
-  @override
-  _DetailsPageState createState() => _DetailsPageState();
-}
-
-class _DetailsPageState extends State<DetailsPage> {
-  InAppWebViewController webView;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +41,7 @@ class _DetailsPageState extends State<DetailsPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 12, 24, 5),
             child: Text(
-              widget?.title ?? "",
+              title ?? "",
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
@@ -65,21 +58,8 @@ class _DetailsPageState extends State<DetailsPage> {
               //   onLoaded: () {},
               //   // style: GoogleFonts.comfortaa(),
               // ),
-              child: InAppWebView(
-                shouldOverrideUrlLoading: (controller, request) async {
-                  Utils.launchURL(request.url);
-                  return ShouldOverrideUrlLoadingAction.CANCEL;
-                },
-                initialData: InAppWebViewInitialData(data: widget.content),
-                initialOptions: InAppWebViewGroupOptions(
-                    android: AndroidInAppWebViewOptions(textZoom: 250),
-                    crossPlatform: InAppWebViewOptions(
-                      useShouldOverrideUrlLoading: true,
-                      debuggingEnabled: true,
-                    )),
-                onWebViewCreated: (InAppWebViewController controller) {
-                  webView = controller;
-                },
+              child: CustomWebView(
+                content: content,
               ),
             ),
           ),
