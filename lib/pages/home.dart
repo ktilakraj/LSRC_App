@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lsrc/pages/about.dart';
 import 'package:lsrc/pages/course.dart';
 import 'package:lsrc/pages/event.dart';
@@ -87,6 +87,7 @@ class _NoticeTabPage extends StatefulWidget {
 class __NoticeTabPageState extends State<_NoticeTabPage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
+  final _index = ValueNotifier<int>(0);
   @override
   void initState() {
     _controller = TabController(
@@ -94,6 +95,9 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
       initialIndex: widget.index ?? 0,
       vsync: this,
     );
+    _controller.animation.addListener(() {
+      if (_index.value != _controller.index) _index.value = _controller.index;
+    });
     super.initState();
   }
 
@@ -114,7 +118,8 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
               height: 50,
               color: Colors.grey[300],
               child: TabBar(
-                labelColor: Colors.black,
+                labelColor: Color(0xff071dbd),
+                unselectedLabelColor: Colors.black,
                 controller: _controller,
                 labelStyle: Theme.of(context)
                     .textTheme
@@ -125,14 +130,23 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
                 indicatorColor: Colors.white,
                 indicatorWeight: 0,
                 tabs: <Widget>[
-                  Tab(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(LineIcons.bullhorn),
-                        SizedBox(width: 10),
-                        Text('Notice Board')
-                      ],
+                  ValueListenableBuilder(
+                    valueListenable: _index,
+                    builder: (context, index, child) => Tab(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SvgPicture.asset(
+                            'assets/campaign.svg',
+                            height: 24,
+                            width: 24,
+                            color:
+                                index == 0 ? Color(0xff071dbd) : Colors.black,
+                          ),
+                          SizedBox(width: 10),
+                          Text('Notice Board')
+                        ],
+                      ),
                     ),
                   ),
                   Tab(
