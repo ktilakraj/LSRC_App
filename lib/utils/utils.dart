@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:html_unescape/html_unescape_small.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
-  static String removeAllHtmlTags(String htmlText) {
-    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+  // static String removeAllHtmlTags(String htmlText) {
+  //   RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
 
-    return htmlText.replaceAll(exp, '');
+  //   return htmlText.replaceAll(exp, '');
+  // }
+
+  static String unescapeHtml(String htmlText) {
+    final unescape = new HtmlUnescape();
+    return unescape.convert(htmlText);
   }
 
   static void showSnackBar(BuildContext context, String message) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/event.dart';
 import '../services/api.dart';
+import '../utils/utils.dart';
 import 'details.dart';
 
 class EventPage extends StatefulWidget {
@@ -43,7 +44,7 @@ class _EventPageState extends State<EventPage> {
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
                     child: Text(
-                      _events[index]?.title?.rendered ?? "",
+                      Utils.unescapeHtml(_events[index]?.title?.rendered ?? ""),
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   )

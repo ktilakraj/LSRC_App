@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/notification.dart';
 import '../services/api.dart';
+import '../utils/utils.dart';
 import 'details.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -50,7 +51,8 @@ class _NotificationPageState extends State<NotificationPage> {
 
                       // leading: Image.asset("assets/notification.png"),
                       child: Text(
-                        _notifications[index]?.title?.rendered ?? "",
+                        Utils.unescapeHtml(
+                            _notifications[index]?.title?.rendered ?? ""),
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       // subtitle: Text(Utils.removeAllHtmlTags(
