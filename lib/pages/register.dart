@@ -230,6 +230,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       if (value.studId != null) {
                                         await UserProvider.saveUserId(
                                             value.studId);
+                                        await _messaging.subscribeToTopic('raheja');
                                         Future.delayed(Duration(seconds: 2),
                                             () {
                                           Navigator.pop(context);

@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -248,6 +249,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: defaultColor,
                           onPressed: () async {
                             await UserProvider.logOut();
+                            await FirebaseMessaging().unsubscribeFromTopic('raheja');
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(

@@ -136,6 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                                       if (value.userId != null) {
                                         await UserProvider.saveUserId(
                                             value.userId);
+                                        await _messaging.subscribeToTopic('raheja');
                                         Future.delayed(Duration(seconds: 2),
                                             () {
                                           Navigator.pop(context);
