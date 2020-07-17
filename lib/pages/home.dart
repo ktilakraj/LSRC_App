@@ -163,8 +163,11 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
               ),
             ),
             Expanded(
-              child: Padding(
+              child: Container(
                 padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/watermark.png"))),
                 child: TabBarView(
                     controller: _controller,
                     children: [NotificationPage(), EventPage()]),
