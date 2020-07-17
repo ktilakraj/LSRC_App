@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:http/http.dart' as http;
 import 'package:lsrc/models/courselist.dart';
@@ -52,6 +54,18 @@ class ApiProvider {
     });
     if (_response?.statusCode == 200) {
       return eventModelFromMap(_response.body);
+    }
+    if (_response != null) recordLog(_response);
+    return null;
+  }
+
+  static Future<NotificationModel> fetchDetails(int id) async {
+    final _response = await http.get("$baseUrl/$id").catchError((e, s) {
+      recordError(e, s);
+      return null;
+    });
+    if (_response?.statusCode == 200) {
+      return NotificationModel.fromMap(json.decode(_response.body));
     }
     if (_response != null) recordLog(_response);
     return null;

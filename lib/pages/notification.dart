@@ -41,6 +41,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                     content: _notifications[index]
                                         ?.content
                                         ?.rendered,
+                                    id: _notifications[index].id,
                                     title:
                                         _notifications[index]?.title?.rendered,
                                   )));

@@ -37,6 +37,7 @@ class _EventPageState extends State<EventPage> {
                       context,
                       MaterialPageRoute(
                           builder: (_) => DetailsPage(
+                                id: _events[index].id,
                                 content: _events[index]?.content?.rendered,
                                 title: _events[index]?.title?.rendered,
                               ))),

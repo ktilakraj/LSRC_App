@@ -23,7 +23,9 @@ class _CustomWebViewState extends State<CustomWebView> {
       },
       initialData: InAppWebViewInitialData(data: widget.content),
       initialOptions: InAppWebViewGroupOptions(
-          android: AndroidInAppWebViewOptions(textZoom: 250),
+          android: AndroidInAppWebViewOptions(
+            textZoom: 250,
+          ),
           crossPlatform: InAppWebViewOptions(
             useShouldOverrideUrlLoading: true,
             debuggingEnabled: true,
