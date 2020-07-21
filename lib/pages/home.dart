@@ -3,9 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lsrc/pages/about.dart';
 import 'package:lsrc/pages/course.dart';
 import 'package:lsrc/pages/event.dart';
-import 'package:lsrc/pages/notification.dart';
 import 'package:lsrc/pages/profile.dart';
 
+import '../constants.dart';
 import 'details_list.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,10 +22,12 @@ class _HomePageState extends State<HomePage> {
       case 0:
         return _NoticeTabPage();
       case 1:
-        return CoursePage();
+        return EventPage();
       case 2:
-        return AboutUsPage();
+        return CoursePage();
       case 3:
+        return AboutUsPage();
+      case 4:
         return ProfilePage();
       default:
         return Container();
@@ -45,34 +47,39 @@ class _HomePageState extends State<HomePage> {
           unselectedItemColor: Colors.white,
           backgroundColor: Color(0xff071dbd),
           type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          // selectedLabelStyle: TextStyle(color: Colors.black),
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               title: Text(
                 'Home',
+                style: TextStyle(color: Colors.white),
               ),
             ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.event),
+                title: Text(
+                  'Events',
+                  style: TextStyle(color: Colors.white),
+                )),
             BottomNavigationBarItem(
               icon: Icon(Icons.local_library),
               title: Text(
                 'Courses',
+                style: TextStyle(color: Colors.white),
               ),
             ),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.event),
-            //     title: Text(
-            //       'Events',
-            //     )),
             BottomNavigationBarItem(
                 icon: Icon(Icons.school),
                 title: Text(
                   'About',
+                  style: TextStyle(color: Colors.white),
                 )),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person), title: Text('Profile')),
+                icon: Icon(Icons.person),
+                title: Text(
+                  'Profile',
+                  style: TextStyle(color: Colors.white),
+                )),
           ],
         ));
   }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lsrc/services/api.dart';
 
+import '../constants.dart';
 import '../models/notification.dart';
 import '../utils/utils.dart';
 import 'details.dart';
@@ -72,6 +73,7 @@ class _DetailsListPageState extends State<DetailsListPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => DetailsPage(
+                                      type: widget.type,
                                       content: _detailsList[index]
                                           ?.content
                                           ?.rendered,
@@ -94,5 +96,3 @@ class _DetailsListPageState extends State<DetailsListPage> {
     );
   }
 }
-
-enum DetailType { notification, event, examination }

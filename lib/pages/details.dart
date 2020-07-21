@@ -3,6 +3,7 @@ import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:html/parser.dart';
+import 'package:lsrc/constants.dart';
 import 'package:lsrc/models/notification.dart';
 import 'package:lsrc/services/api.dart';
 // import 'package:pdf_flutter/pdf_flutter.dart';
@@ -14,8 +15,14 @@ class DetailsPage extends StatefulWidget {
   final String content;
   final String title;
   final int id;
+  final DetailType type;
 
-  const DetailsPage({Key key, this.content, this.title, this.id})
+  const DetailsPage(
+      {Key key,
+      @required this.content,
+      @required this.title,
+      @required this.type,
+      @required this.id})
       : super(key: key);
 
   @override
@@ -28,6 +35,19 @@ class _DetailsPageState extends State<DetailsPage> {
   void initState() {
     _fetch = ApiProvider.fetchDetails(widget.id);
     super.initState();
+  }
+
+  String _getTitle(DetailType type) {
+    switch (type) {
+      case DetailType.event:
+        return 'Events';
+      case DetailType.notification:
+        return 'Notice Board';
+      case DetailType.examination:
+        return 'Examination';
+      default:
+        return '';
+    }
   }
 
   @override
@@ -47,7 +67,8 @@ class _DetailsPageState extends State<DetailsPage> {
         actions: <Widget>[
           Center(
             child: Text(
-              'Notice Board',
+              // 'Notice Board',
+              _getTitle(widget.type),
               style: Theme.of(context)
                   .textTheme
                   .headline6

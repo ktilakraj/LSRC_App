@@ -28,3 +28,4 @@ class CourseDetails {
 }
 
 const defaultColor = Color(0xff071DBD);
+enum DetailType { notification, event, examination }

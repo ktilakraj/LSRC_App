@@ -10,7 +10,7 @@ import '../constants.dart';
 import '../models/about.dart';
 import '../models/auth.dart';
 import '../models/course.dart';
-import '../models/event.dart';
+// import '../models/event.dart';
 import '../models/notification.dart';
 
 class ApiProvider {
@@ -46,14 +46,14 @@ class ApiProvider {
     return null;
   }
 
-  static Future<List<EventModel>> get fetchEvents async {
+  static Future<List<NotificationModel>> get fetchEvents async {
     final _response =
         await http.get("$baseUrl?categories=42").catchError((e, s) {
       recordError(e, s);
       return null;
     });
     if (_response?.statusCode == 200) {
-      return eventModelFromMap(_response.body);
+      return notificationApiModelFromMap(_response.body);
     }
     if (_response != null) recordLog(_response);
     return null;
