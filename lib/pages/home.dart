@@ -6,6 +6,8 @@ import 'package:lsrc/pages/event.dart';
 import 'package:lsrc/pages/notification.dart';
 import 'package:lsrc/pages/profile.dart';
 
+import 'details_list.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -153,9 +155,9 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.event),
+                        Icon(Icons.library_books),
                         SizedBox(width: 10),
-                        Text('Events')
+                        Text('Examination')
                       ],
                     ),
                   )
@@ -168,9 +170,15 @@ class __NoticeTabPageState extends State<_NoticeTabPage>
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/watermark.png"))),
-                child: TabBarView(
-                    controller: _controller,
-                    children: [NotificationPage(), EventPage()]),
+                child: TabBarView(controller: _controller, children: [
+                  DetailsListPage(
+                    type: DetailType.notification,
+                  ),
+                  DetailsListPage(
+                    type: DetailType.examination,
+                  )
+                  // EventPage()
+                ]),
               ),
             ),
           ],

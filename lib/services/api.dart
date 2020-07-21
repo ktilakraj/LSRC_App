@@ -118,6 +118,19 @@ class ApiProvider {
     return null;
   }
 
+  static Future<List<NotificationModel>> get fetchExaminations async {
+    final _response =
+        await http.get("$baseUrl?categories=44").catchError((e, s) {
+      recordError(e, s);
+      return null;
+    });
+    if (_response?.statusCode == 200) {
+      return notificationApiModelFromMap(_response.body);
+    }
+    if (_response != null) recordLog(_response);
+    return null;
+  }
+
   static Future<AuthModel> register(
       {String email,
       String pass,
