@@ -48,7 +48,7 @@ class ApiProvider {
 
   static Future<List<NotificationModel>> get fetchEvents async {
     final _response =
-        await http.get("$baseUrl?categories=42").catchError((e, s) {
+        await http.get("$baseUrl?categories=42&per_page=60").catchError((e, s) {
       recordError(e, s);
       return null;
     });
@@ -107,7 +107,7 @@ class ApiProvider {
 
   static Future<List<NotificationModel>> get fetchNotifcations async {
     final _response =
-        await http.get("$baseUrl?categories=41").catchError((e, s) {
+        await http.get("$baseUrl?categories=41&per_page=60").catchError((e, s) {
       recordError(e, s);
       return null;
     });
@@ -120,7 +120,7 @@ class ApiProvider {
 
   static Future<List<NotificationModel>> get fetchExaminations async {
     final _response =
-        await http.get("$baseUrl?categories=44").catchError((e, s) {
+        await http.get("$baseUrl?categories=44&per_page=60").catchError((e, s) {
       recordError(e, s);
       return null;
     });
