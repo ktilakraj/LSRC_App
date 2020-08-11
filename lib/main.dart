@@ -1,8 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'constants.dart';
 import 'pages/home.dart';
@@ -13,6 +15,10 @@ import 'services/hive.dart';
 void main() async {
   final _loggedIn = await UserProvider.isLoggedIn;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
   runZonedGuarded(
       () async => runApp(MyApp(
             loggedIn: _loggedIn,
