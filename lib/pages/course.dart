@@ -28,7 +28,7 @@ class _CoursePageState extends State<CoursePage> {
         actions: <Widget>[
           Center(
             child: Text(
-              'Courses',
+              'Programs',
               style: Theme.of(context)
                   .textTheme
                   .headline6

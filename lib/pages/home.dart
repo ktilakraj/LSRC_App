@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.local_library),
               title: Text(
-                'Courses',
+                'Programs',
                 style: TextStyle(color: Colors.white),
               ),
             ),
